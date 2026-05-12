@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── LNU Brand Tokens ── */
+:root {
+    --blue-dark:   #003087;
+    --blue:        #0047AB;
+    --blue-mid:    #1565C0;
+    --gold:        #C9A84C;
+    --gold-bright: #F0C040;
+    --gold-glow:   rgba(201,168,76,0.35);
+    --cream:       #FFFDF5;
+    --cream-2:     #FFF8E1;
+    --ink:         #1a1208;
+    --ink-2:       #4a3a1a;
+    --ink-3:       #8c7a5a;
+}
+
+/* ── Animations ── */
+@keyframes spin       { to { transform: rotate(360deg); } }
+@keyframes fadeUp     { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeLeft   { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes float1     { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(3deg); } }
+@keyframes float2     { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(14px) rotate(-2deg); } }
+@keyframes float3     { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.04); } }
+@keyframes gridPulse  { 0%,100% { opacity: 0.3; } 50% { opacity: 0.6; } }
+@keyframes shimmerBar { from { transform: translateX(-100%); } to { transform: translateX(200%); } }
+@keyframes goldPulse  { 0%,100% { box-shadow: 0 0 0 0 var(--gold-glow), 0 16px 40px rgba(0,0,0,0.2); } 50% { box-shadow: 0 0 0 10px transparent, 0 16px 40px rgba(0,0,0,0.2); } }
+@keyframes eyePop     { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3) rotate(-12deg); } }
+@keyframes eyeHide    { 0%,100% { transform: scale(1) rotate(0); } 40% { transform: scale(0.65) rotate(18deg); } 70% { transform: scale(1.18) rotate(-6deg); } }
+@keyframes dotDrift   { 0% { background-position: 0 0; } 100% { background-position: 56px 56px; } }
+
+/* ── Root ── */
+.login-root {
+    min-height: 100vh;
+    display: flex;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animated dot pattern */
+.login-root::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(201,168,76,0.18) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    animation: dotDrift 20s linear infinite;
+    pointer-events: none; z-index: 0;
+}
+
+/* Subtle blue grid */
+.login-root::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(0,48,135,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,48,135,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridPulse 6s ease-in-out infinite;
+    pointer-events: none; z-index: 0;
+}
+
+/* ── Floating blobs ── */
+.login-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.login-blob-1 {
+    width: 500px; height: 500px;
+    top: -160px; left: -120px;
+    background: radial-gradient(circle, rgba(0,71,171,0.15) 0%, transparent 65%);
+    animation: float1 10s ease-in-out infinite;
+}
+.login-blob-2 {
+    width: 400px; height: 400px;
+    bottom: -120px; right: -80px;
+    background: radial-gradient(circle, rgba(201,168,76,0.14) 0%, transparent 65%);
+    animation: float2 13s ease-in-out infinite;
+}
+.login-blob-3 {
+    width: 280px; height: 280px;
+    top: 50%; left: 35%;
+    background: radial-gradient(circle, rgba(0,48,135,0.07) 0%, transparent 65%);
+    animation: float3 9s ease-in-out infinite;
+}
+
+/* ── Layout ── */
+.login-layout {
+    position: relative; z-index: 10;
+    display: flex;
+    width: 100%; min-height: 100vh;
+}
+
+/* ══════════════════════════
+   LEFT PANEL — LNU Blue
+══════════════════════════ */
+.login-left-panel {
+    width: 50%;
+    flex-shrink: 0;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: linear-gradient(160deg, #003087 0%, #0047AB 45%, #1565C0 100%);
+    overflow: hidden;
+}
+
+/* Warm gold glow inside panel */
+.login-left-panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(ellipse 70% 50% at 20% 30%, rgba(201,168,76,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 80% 85%, rgba(240,192,64,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Diagonal edge divider */
+.login-left-panel::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -1px;
+    width: 80px; height: 100%;
+    background: linear-gradient(to bottom right, transparent 49.5%, rgba(255,253,245,0.04) 50%, transparent 50.5%);
+    pointer-events: none;
+}
+
+.login-brand-wrap {
+    position: relative; z-index: 1;
+    animation: fadeLeft 0.6s 0.1s ease both;
+}
+
+/* LNU gold crest */
+.login-logo-ring {
+    width: 76px; height: 76px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.2), 0 16px 40px rgba(0,0,0,0.25);
+    position: relative; overflow: hidden;
+    animation: goldPulse 3s ease-in-out infinite;
+}
+.login-logo-ring::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 55%);
+    pointer-events: none;
+}
+.login-logo-text {
+    font-family: 'Sora', sans-serif;
+    font-weight: 900; font-size: 20px;
+    color: var(--blue-dark);
+    letter-spacing: 0.06em;
+    position: relative; z-index: 1;
+}
+
+.login-brand-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 38px; font-weight: 800;
+    line-height: 1.15; color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.login-brand-sub {
+    font-size: 14px; font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.03em;
+}
+
+/* Feature list */
+.login-feature-list {
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeLeft 0.6s 0.25s ease both;
+}
+
+.login-feature-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    position: relative; overflow: hidden;
+    transition: background 0.22s, border-color 0.22s, transform 0.22s;
+}
+.login-feature-item:hover {
+    background: rgba(255,255,255,0.13);
+    border-color: rgba(201,168,76,0.45);
+    transform: translateX(4px);
+}
+.login-feature-item::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    animation: shimmerBar 4.5s ease-in-out infinite;
+}
+.login-feature-icon { font-size: 18px; flex-shrink: 0; }
+.login-feature-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+    font-weight: 400; line-height: 1.4;
+}
+
+.login-brand-footer {
+    position: relative; z-index: 1;
+    font-size: 11px; color: rgba(255,255,255,0.25);
+    letter-spacing: 0.04em;
+    animation: fadeLeft 0.6s 0.35s ease both;
+}
+
+/* ══════════════════════════
+   RIGHT PANEL — Warm white
+══════════════════════════ */
+.login-right-panel {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px 56px;
+    background: var(--cream);
+}
+
+.login-card {
+    width: 100%; max-width: 400px;
+}
+
+.login-card-top {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.5s 0.15s ease both;
+}
+
+.login-card-logo {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 800; font-size: 13px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 8px 24px rgba(0,48,135,0.28);
+}
+
+.login-card-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--blue-dark);
+    line-height: 1.2; letter-spacing: -0.01em;
+}
+.login-card-sub {
+    font-size: 13px; color: var(--ink-3);
+    margin-top: 3px; font-style: italic;
+}
+
+/* ── Error box ── */
+.login-error-box {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(192,57,43,0.06);
+    border: 1px solid rgba(192,57,43,0.2);
+    border-left: 3px solid #c0392b;
+    border-radius: 10px;
+    padding: 11px 15px;
+    font-size: 13px; color: #c0392b; font-weight: 500;
+    margin-bottom: 20px;
+    animation: fadeUp 0.3s ease both;
+    line-height: 1.5;
+}
+.login-error-icon { font-size: 15px; }
+
+/* ── Form ── */
+.login-form {
+    display: flex; flex-direction: column;
+    gap: 16px;
+    animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.login-field-wrap {
+    display: flex; flex-direction: column; gap: 7px;
+}
+
+.login-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--ink-2);
+    letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.login-input-wrap {
+    position: relative; display: flex; align-items: center;
+}
+
+.login-input-icon {
+    position: absolute; left: 14px;
+    font-size: 15px; pointer-events: none; line-height: 1;
+    opacity: 0.45;
+    transition: opacity 0.2s;
+}
+
+.login-input {
+    width: 100%;
+    padding: 13px 14px 13px 44px;
+    background: #fff;
+    border: 1.5px solid rgba(0,48,135,0.14);
+    border-radius: 11px;
+    font-size: 14px; color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 6px rgba(0,48,135,0.05);
+}
+.login-input::placeholder { color: rgba(26,18,8,0.28); }
+.login-input:focus {
+    outline: none;
+    background: var(--cream-2);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.14), 0 2px 8px rgba(0,48,135,0.07);
+}
+.login-input-wrap:focus-within .login-input-icon { opacity: 0.7; }
+
+.login-input-password { padding-right: 48px; }
+
+/* ── Eye button ── */
+.login-eye-btn {
+    position: absolute; right: 11px;
+    background: none; border: none; cursor: pointer;
+    padding: 5px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-3);
+    transition: background 0.2s, color 0.2s;
+}
+.login-eye-btn:hover {
+    background: rgba(201,168,76,0.12);
+    color: var(--blue-dark);
+}
+.login-eye-btn svg { width: 19px; height: 19px; display: block; }
+.login-eye-btn.eye-pop  svg { animation: eyePop  0.35s cubic-bezier(0.34,1.56,0.64,1) both; }
+.login-eye-btn.eye-hide svg { animation: eyeHide 0.35s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* ── Submit button ── */
+.login-submit-btn {
+    margin-top: 8px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+    color: #fff; border: none; border-radius: 11px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 28px rgba(0,48,135,0.3);
+    transition: opacity 0.18s, transform 0.18s, box-shadow 0.18s;
+    position: relative; overflow: hidden;
+}
+/* Top-gloss overlay */
+.login-submit-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+/* Gold underline on hover */
+.login-submit-btn::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    border-radius: 0 0 11px 11px;
+}
+.login-submit-btn:hover:not(:disabled)::after { transform: scaleX(1); }
+.login-submit-btn:hover:not(:disabled) {
+    opacity: 0.93;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 36px rgba(0,48,135,0.38);
+}
+.login-submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ── Spinner ── */
+.login-spinner {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    display: inline-block;
+    animation: spin 0.75s linear infinite;
+}
+
+/* ── Divider ── */
+.login-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 26px 0 18px;
+    animation: fadeUp 0.5s 0.3s ease both;
+}
+.login-divider-line { flex: 1; height: 1px; background: rgba(0,48,135,0.1); }
+.login-divider-text {
+    font-size: 11px; color: var(--ink-3);
+    font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+/* ── Help text ── */
+.login-help-text {
+    font-size: 12px; color: var(--ink-3);
+    text-align: center; line-height: 1.7;
+    animation: fadeUp 0.5s 0.35s ease both;
+}
+.login-help-text strong { color: var(--blue-dark); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .login-left-panel { display: none; }
+    .login-right-panel { padding: 36px 28px; background: var(--cream); }
+    .login-layout { min-height: 100vh; }
+}
