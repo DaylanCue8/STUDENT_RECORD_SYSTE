@@ -14,7 +14,7 @@ class SubjectSeeder extends Seeder
 
         $BachelorofScienceinInformationTechnologyCourseId = $this->getCourseId('Bachelor of Science in Information Technology');
 
-        // BSIT - 9 subjects per semester per year (4 years × 2 semesters)
+        // Bachelor - 9 subjects per semester per year (4 years × 2 semesters)
         $BachelorofScienceinInformationTechnologySubjects = [
             // 1st Year
             1 => [
@@ -123,7 +123,6 @@ class SubjectSeeder extends Seeder
             'Bachelor of Arts in English Language',
             'Bachelor of Science in Social Work',
             'Bachelor of Science in Biology (with Specialization in Medical Biology, Environmental Biology, and Molecular Biology)',
-            'Bachelor of Science in Information Technology',
             'Bachelor of Library and Information Science',
             'Bachelor of Music in Music Education',
             'Bachelor of Science in Tourism Management (with Specialization in Events Management and Travel Management)',

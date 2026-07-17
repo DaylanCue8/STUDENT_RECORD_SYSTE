@@ -1,0 +1,28 @@
+TO RESTART THE FRONTEND SERVICE, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose restart frontend  
+
+TO START THE DOCKER COMPOSE SERVICES, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose up -d          
+
+TO SHUTDOWN THE DOCKER COMPOSE SERVICES, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose down   
+
+TO BUILD CONTAINER IMAGES, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose up --build  
+
+TO VIEW THE LOGS OF THE SERVICES, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose logs -f
+
+TO VIEW THE STATUS OF THE SERVICES, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose ps
+
+TO SEED THE DATABASE, YOU CAN USE THE FOLLOWING COMMAND:
+
+docker compose exec backend php artisan migrate:fresh --seed                                              
+
